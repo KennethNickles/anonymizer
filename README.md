@@ -20,5 +20,5 @@ run script: python anonymizer.py example_consent.xlsx
 output is example_consent_anonymized.xlsx
 
 # TODO
-support spaces in file names
-add variable salt input to command line
+- support spaces in file names
+- add variable salt input to command line
