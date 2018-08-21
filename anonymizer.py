@@ -12,10 +12,13 @@ import base64
 import pandas as pd
 import numpy as np
 
-salt = "bluegreenredwhiteblack"
+defaultSalt = "bluegreenredwhiteblack"
 
 def main():
 	fileName = sys.argv[1]
+	salt = defaultSalt
+	if len(sys.argv) > 2:
+		salt = sys.argv[2]
 	xlsx = pd.ExcelFile(fileName)
 	df = pd.read_excel(xlsx, xlsx.sheet_names[0])
 	for column in df.columns:
