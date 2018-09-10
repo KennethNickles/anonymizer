@@ -33,7 +33,7 @@ def main():
 					newRow = [row[0], row[1], row[2], row[3], row[4]]
 					if index != 0:
 						dk = hashlib.pbkdf2_hmac('sha1', str.encode(row[2]) , str.encode(salt), 100000)
-						dk_readable = base64.urlsafe_b64encode(dk)
+						dk_readable = binascii.hexlify(dk)
 						print(dk_readable)
 						newRow[0] = ""
 						newRow[1] = ""
