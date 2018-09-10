@@ -23,9 +23,9 @@ def main():
 	if len(sys.argv) > 2:
 		salt = sys.argv[2]
 	if fileExtension == ".csv":
-		with open(fileName, 'r') as readfile:
+		with open(fileName, 'r', encoding="utf8") as readfile:
 			reader = csv.reader(readfile, delimiter=',', quoting=csv.QUOTE_ALL)
-			with open(fileName[:fileName.find('.')] + "_anonymized.csv", "w", newline='') as writefile:
+			with open(fileName[:fileName.find('.')] + "_anonymized.csv", "w", encoding="utf8", newline='') as writefile:
 				writer = csv.writer(writefile, delimiter=',', quoting=csv.QUOTE_ALL)
 				index = 0
 				newRows = []
