@@ -22,6 +22,7 @@ def main():
 	salt = defaultSalt
 	if len(sys.argv) > 2:
 		salt = sys.argv[2]
+	caches = {}
 	if fileExtension == ".csv":
 		with open(fileName, 'r', encoding="utf8") as readfile:
 			reader = csv.reader(readfile, delimiter=',', quoting=csv.QUOTE_ALL)
@@ -32,9 +33,13 @@ def main():
 				for row in reader:
 					newRow = [row[0], row[1], row[2], row[3], row[4]]
 					if index != 0:
-						dk = hashlib.pbkdf2_hmac('sha1', str.encode(row[2]) , str.encode(salt), 100000)
-						dk_readable = binascii.hexlify(dk)
-						print(dk_readable)
+						dk_readable = b"unknown"
+						if row[2] in caches.keys():
+							dk_readable = caches[row[2]]
+						else:
+							dk = hashlib.pbkdf2_hmac('sha1', str.encode(row[2]) , str.encode(salt), 100)
+							dk_readable = binascii.hexlify(dk)
+							caches[row[2]] = dk_readable
 						newRow[0] = ""
 						newRow[1] = ""
 						newRow[2] = dk_readable
